@@ -23,6 +23,9 @@ def Perfil(request):
 def Equipo(request):
     return render(request,"equipo.html")
 
+def Historias(request):
+    return render(request,"historias.html")
+
 def Reportes(request):
     return render(request,"reportes.html")
 
