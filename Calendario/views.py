@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth import get_user_model
-from .models import Proyecto,HistoriaUsuario
+from .models import Proyecto,HistoriaUsuario,Reportes
+from .forms import ReportForm
 User = get_user_model()
 # Create your views here.
 def Inicio(request):
@@ -23,11 +24,27 @@ def Perfil(request):
 def Equipo(request):
     return render(request,"equipo.html")
 
-def Historias(request):
-    return render(request,"historias.html")
+def Report(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        area = request.POST['area']
+        category = request.POST['category']
+        content = request.POST['content']
+        image = request.FILES.get('image')
 
-def Reportes(request):
-    return render(request,"reportes.html")
+        nuevo_reporte = Reportes.objects.create(
+            title=title,
+            area=area,
+            category=category,
+            content=content,
+            image=image
+        )
+
+        reportes_list = Reportes.objects.all()
+        return render(request, 'reportes.html', {'reportes': reportes_list})
+
+    reportes_list = Reportes.objects.all()
+    return render(request, 'reportes.html', {'reportes': reportes_list})
 
 def Calendario(request):
     ##esto es para pruebas nomas, aprendo a hacer querys en django
