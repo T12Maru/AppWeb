@@ -25,7 +25,6 @@ urlpatterns = [
     path('logout/',views.Logout,name='logout'),
     path('perfil/',views.Perfil,name='perfil'),
     path('equipo/',views.Equipo,name='equipo'),
-    path('reportes/',views.Reportes,name='reportes'),
+    path('reportes/',views.Report,name='reportes'),
     path('calendario/',views.Calendario,name='calendario'),
-    path('historias/',views.Historias,name='historias'),
 ]
